@@ -1,3 +1,3 @@
 # Segmentation-assisted-defect-inspection-of-glass-bottle-finishes
 
-under review
+This work is currently under review
