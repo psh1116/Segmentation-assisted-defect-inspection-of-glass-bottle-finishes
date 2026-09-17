@@ -2,3 +2,4 @@
 *.pt
 *.ckpt
 *.onnx
+.DS_Store

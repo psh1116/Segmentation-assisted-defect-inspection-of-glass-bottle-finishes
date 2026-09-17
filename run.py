@@ -12,8 +12,8 @@ import segmentation_models_pytorch as smp
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 BASE_DIR = Path(__file__).resolve().parent
-SEG_MODEL_PATH = BASE_DIR / "checkpoint_epoch20.pth"
-CLS_MODEL_PATH = BASE_DIR / "best_model.pth"
+SEG_MODEL_PATH = BASE_DIR / "seg_model.pth"
+CLS_MODEL_PATH = BASE_DIR / "cls_model.pth"
 INPUT_DIR = BASE_DIR
 
 SEG_SCALE = 0.3
@@ -36,7 +36,7 @@ class FastValidator:
     ]
 
     def __init__(self, seg_path, cls_path):
-        print(f"🔄 Loading and preparing models... DEVICE={DEVICE}")
+        print(f"Loading and preparing models... DEVICE={DEVICE}")
 
         self.seg_model = smp.Unet(
             encoder_name="resnet18",
@@ -68,7 +68,7 @@ class FastValidator:
 
     @torch.inference_mode()
     def _warm_up(self):
-        print("🔥 Warming up models...")
+        print("Warming up models...")
 
         seg_size = int(1024 * SEG_SCALE)
 
@@ -88,7 +88,7 @@ class FastValidator:
         synchronize()
 
     def load_all_to_ram(self, input_path):
-        print(f"📦 Loading images into RAM: {input_path}")
+        print(f"Loading images into RAM: {input_path}")
 
         input_path = Path(input_path)
         image_files = sorted(
@@ -192,7 +192,7 @@ class FastValidator:
         total_imgs = len(data_list)
 
         if total_imgs == 0:
-            print("❌ No images available for benchmarking.")
+            print("No images available for benchmarking.")
             return
 
         correct_count = 0
@@ -203,7 +203,7 @@ class FastValidator:
             for name in self.STAGE_NAMES
         }
 
-        print(f"🚀 Starting benchmark: {total_imgs} images in total")
+        print(f"Starting benchmark: {total_imgs} images in total")
 
         for item in tqdm(data_list, desc="Benchmark"):
             full_img = item["img"]
@@ -327,7 +327,7 @@ class FastValidator:
         print("Final performance report")
         print("=" * 50)
         print(
-            f"✅ Accuracy: {accuracy:.2f}% "
+            f"Accuracy: {accuracy:.2f}% "
             f"({correct_count}/{total_imgs})"
         )
         print(f"Mean End-to-End: {avg_time_ms:.3f} ms/image")
@@ -349,4 +349,4 @@ if __name__ == "__main__":
     if in_memory_data:
         validator.run_benchmark(in_memory_data)
     else:
-        print("❌ No data loaded.")
+        print("No data loaded.")
