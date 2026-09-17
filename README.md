@@ -1,6 +1,9 @@
-# Segmentation-assisted-defect-inspection-of-glass-bottle-finishes
+# Segmentation-Assisted Defect Inspection of Glass Bottle Finishes
 
-This work is currently under review
+> **Status:** This work is currently under review.
 
-### checkpoint link
-[](https://drive.google.com/drive/folders/19KjOPftqahTcERvUaCNp25xLpPRZ3esX?usp=sharing)
+## Model Checkpoint
+
+The trained model checkpoint is available on Google Drive:
+
+[Download the model checkpoint](https://drive.google.com/drive/folders/19KjOPftqahTcERvUaCNp25xLpPRZ3esX?usp=sharing)
